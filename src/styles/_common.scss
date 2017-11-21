@@ -1,0 +1,198 @@
+/* z-index */
+
+.modal {
+  z-index: 300;
+}
+
+.comp > div,
+.logo,
+footer,
+header {
+  position: relative;
+  z-index: 200;
+}
+
+.form,
+canvas {
+  z-index: 1000;
+}
+
+/* 浮层切换动画 */
+
+.modal {
+  @include opacity-on();
+  @include divPosition();
+
+  .bg {
+    @include divPosition();
+    background-color: rgba(0, 0, 0, 0.70);
+  }
+
+  .inner {
+    position: absolute;
+  }
+}
+
+.view-animate {
+  transition-duration: 1s;
+  position: absolute !important;
+  left: 0;
+  top: 0;
+
+  &.ng-enter {
+    opacity: 0;
+    transform: scale(1.2);
+
+    &.ng-enter-active {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  &.ng-leave {
+    opacity: 1;
+
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
+}
+
+.main-content,
+body,
+html {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  @include size(100%);
+  overflow: hidden;
+  margin: auto;
+
+  section {
+    @include size(100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+}
+
+.screen-lock {
+  @include divPosition(100%, 100vh);
+  @include opacity-on;
+  display: flex;
+  position: fixed;
+  background: #000 no-repeat center center / cover;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #000;
+
+  .logo {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .music {
+    @include extendClickArea(15px);
+    position: absolute;
+    right: 23px;
+    height: 18px;
+    top: 18px;
+    opacity: .5;
+
+    html.android & {
+      right: 50px;
+    }
+
+    &.on {
+      opacity: 1;
+    }
+  }
+}
+
+.godown {
+  bottom: 3%;
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+
+   > span,
+  > img {
+    margin: auto;
+  }
+
+  img {
+    height: 1.5vw;
+  }
+
+  span {
+    @include size(18px);
+    display: block;
+    margin-top: 1%;
+    animation: arrowdown .5s infinite alternate;
+
+    i {
+      @include arrow(#fff, #fff, 35deg);
+    }
+  }
+}
+
+.video {
+  @include opacity-on;
+  transition: none;
+  width: 100%;
+  height: calc(100vw / 16 * 9);
+  top: 50%;
+  margin-top: calc(-100vw / 16 * 9 / 2);
+}
+
+.skip {
+  @include extendClickArea(20px);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+}
+
+.share-box {
+  .inner div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 140px;
+    display: none;
+
+    &.on {
+      display: block;
+    }
+  }
+}
+
+#application {
+  @include opacity-on;
+  position: absolute;
+  pointer-events: none !important;
+  top: 0;
+  left: 0;
+}
+@media screen and (orientation:portrait) {}
+@media (orientation:landscape) {
+  .screen-lock {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
