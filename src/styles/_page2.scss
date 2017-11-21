@@ -1,0 +1,21 @@
+.page2 {
+  > div {
+    position: absolute;
+    opacity: 0;
+    transition: .5 all ease;
+
+    &.on {
+      opacity: 1;
+    }
+  }
+
+  .bg {
+    height: 100%;
+    position: absolute;
+    top: 60px;
+    background: #000 url('../assets/images/page2-bg.jpg') no-repeat center top/contain;
+  }
+  .title{
+      top: 8%;
+  }
+}
