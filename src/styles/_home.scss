@@ -1,0 +1,94 @@
+.home {
+  background: #0b0f15 url('../assets/images/bg.jpg') no-repeat center top/contain;
+
+  .bg > div,
+  > div {
+    position: absolute;
+    opacity: 0;
+    transition: .5 all ease;
+
+    &.on {
+      opacity: 1;
+    }
+  }
+
+  .bg {
+    @include size(100%);
+
+    .car {
+      transform: scale(.7);
+
+      &.on {
+        transform: scale(1);
+      }
+
+      img {
+        animation: flash 2s linear alternate infinite 1s;
+      }
+    }
+  }
+
+  .car2 {
+    filter: blur(3px);
+
+    &.on {
+      filter: blur(0);
+
+      img {
+        animation: flash 2s linear alternate infinite 1s;
+      }
+    }
+  }
+
+  &.on {
+    transform: scale(1.1);
+  }
+
+  .btn {
+    bottom: 16%;
+    transform: scale(1.1) translate(0, 50%) rotate(-10deg);
+    transition: 1s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &.on {
+      transform: scale(1.1) translate(0,0) rotate(0);
+    }
+  }
+}
+
+.smoke {
+  width: 100%;
+  height: calc(100vh - 60px);
+  top: 60px;
+  background: url('../assets/images/smoke.png') no-repeat center top / cover;
+  transform: scale(1.5);
+  transition: 2s all ease;
+
+  &.on {
+    transform: scale(1);
+    animation: flash 3s linear alternate infinite 2s;
+  }
+}
+
+.play-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1 !important;
+}
+
+.pic-video {
+    height: 100%;
+  background: #0d1012;
+  .btnshare {
+    position: absolute;
+    bottom: 8%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    a {
+      height: 40px;
+      margin: 0 10px;
+    }
+  }
+}
