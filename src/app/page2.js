@@ -13,5 +13,16 @@
             $('.page-video').addClass('on');
             $('video')[0].play();
         });
+
+        var audio=$('#audio')[0];
+        // audio.loop = false;
+        setTimeout(function(){
+            audio.addEventListener('ended', function () {
+                console.log('over');
+                $('.page-video').empty();
+                $('.pagevideo').addClass('on');
+                $('.pbtn').find('div').addClass('on');
+            }, false);
+        },5000)
     }
 })();

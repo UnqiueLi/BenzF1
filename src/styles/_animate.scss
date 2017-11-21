@@ -99,3 +99,21 @@
         transform: rotate(-360deg);
     }
 }
+
+@keyframes aroundBreath {
+    from {
+        transform: rotate(0);
+        opacity: .5;
+        transform: scale(1.1);
+    }
+    50%{
+        opacity: 1;
+        transform: scale(1);
+        transform: rotate(180deg);
+    }
+    to {
+        opacity: .8;
+        transform: scale(1.1);
+        transform: rotate(-360deg);
+    }
+}

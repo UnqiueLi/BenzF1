@@ -1,6 +1,6 @@
 .page2 {
-  >div,
-  .bg>div {
+  .bg > div,
+  > div {
     position: absolute;
     opacity: 0;
     transition: .5 all ease;
@@ -75,4 +75,30 @@
   left: 50%;
   margin-left: -47px;
   z-index: 100;
+}
+
+.pagevideo {
+  .pbtn {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 87px;
+    height: 87px;
+    margin-left: -47px;
+    transition: .5s all ease .8s;
+    // opacity: 0;
+    // animation: breath 2s  linear infinite;
+    > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      & > img {
+        // animation: aroundBreath 2s  linear infinite;
+        animation: breath 2s linear infinite;
+      }
+    }
+  }
+  &.on{
+      opacity: 1;
+  }
 }
