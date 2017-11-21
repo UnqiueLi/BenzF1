@@ -1,0 +1,82 @@
+﻿$enable-flex: false !default;
+$enable-hover-media-query: false !default;
+$enable-grid-classes: false;
+$enable-rounded: true;
+$enable-shadows: true;
+$enable-gradients: true;
+$enable-transitions: true;
+$font-family-sans-serif: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-root: 10px;
+$imageScale: .5; //图片缩放变量
+$themeColor: #e11444;
+$videoRatio: 1334 / 698;
+$videoRatio2: 698 / 1334;
+
+
+/*@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(styles/fonts/OpenSans-Light.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Exo 2 Thin'), local('Exo2-Thin'), url(styles/fonts/Exo-2.woff) format('woff');
+}*/
+
+@font-face {
+    font-family: 'DIN';
+    font-style: normal;
+    font-weight: 600;
+    src: local('DINCondensed-Bold'),
+         local('DINCondensed-Bold'),
+         url(styles/fonts/DINCondensed-Bold.woff) format('woff');
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; /*touch-action: none;*/ }
+a { display: inline-block; text-decoration: none; }
+img { max-width: 100%; max-height: 100%; pointer-events: none; }
+i { font-style: normal; }
+img, video, canvas, svg { display: block; }
+ul,
+figure {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+button { padding: 0; }
+
+input, textarea, button, select { appearance: none; background: none; border: none; outline: none;
+    /*&.ng-invalid,
+    &.ng-invalid-pattern {
+        &.ng-dirty { box-shadow: rgb(255, 0, 0) 0px 0px 0px 1px; }
+    }*/
+}
+input[type="radio"] { appearance: radio; }
+input[type="checkbox"] { appearance: checkbox; }
+select { width: 100%; }
+canvas, video { width: 100%; }
+
+@mixin blur ($blur) {
+    filter: blur($blur);
+    transition: 1.5s all ease;
+    opacity: 0;
+    &.on {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+@mixin videoPositionCenter() {
+    @include opacity-on;
+    @include divPosition(100%);
+    // width: 100vh * $videoRatio;
+    // height: 100vh;
+    // top: 50%;
+    // margin-top: -50vh;
+}
