@@ -1,5 +1,6 @@
 .page2 {
-  > div {
+  >div,
+  .bg>div {
     position: absolute;
     opacity: 0;
     transition: .5 all ease;
@@ -19,7 +20,16 @@
     .title {
       position: absolute;
       top: 8%;
+      opacity: 0;
+      transform: translate(0, 20%);
+      transition: .5s all ease .5s;
+
+      &.on {
+        opacity: 1;
+        transform: none;
+      }
     }
+
     .btn {
       position: absolute;
       bottom: 20%;
@@ -28,11 +38,41 @@
       height: 87px;
       margin-left: -47px;
       transition: .5s all ease .8s;
-      .btntext{
-        position: absolute;
-        bottom: 0%;
-        left: 0%;
+      opacity: 0;
+      transform: translate(0, 100%);
+
+      & > img {
+        animation: around 2s linear infinite;
       }
+
+      .btntext {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      &.on {
+        opacity: 1;
+        transform: none;
+      }
+
     }
+
   }
+
+  .play-video {
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
+}
+
+.pagebtn {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  margin-left: -47px;
+  z-index: 100;
 }

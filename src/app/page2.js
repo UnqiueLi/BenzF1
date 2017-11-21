@@ -9,6 +9,9 @@
 
     /** @ngInject */
     function Page2Controller($scope, $location) {
-    
+        $('.pagebtn').click(function(){
+            $('.page-video').addClass('on');
+            $('video')[0].play();
+        });
     }
 })();
