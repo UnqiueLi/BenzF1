@@ -1,18 +1,16 @@
 .page2 {
   .bg > div,
   > div {
+    width: 100%;
+    height: 100%;
     position: absolute;
     opacity: 0;
-    transition: .5 all ease;
-
+    transition: .5s all ease;
     &.on {
       opacity: 1;
     }
   }
-
   .bg {
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 60px;
     background: #000 url('../assets/images/page2-bg.jpg') no-repeat center top/contain;
@@ -57,46 +55,39 @@
       }
 
     }
-
-  }
-
-  .play-video {
-    position: absolute;
-    top: 60px;
-    left: 0;
   }
 }
-
 .pagebtn {
   width: 100px;
   height: 100px;
   position: absolute;
-  bottom: 20%;
+  bottom: 15%;
   left: 50%;
   margin-left: -47px;
   z-index: 100;
 }
 
 .pagevideo {
-    // transition: .5s all ease .3s;
+  background: url('assets/images/video-bg.jpg') no-repeat top/cover;
     opacity: 0;
   .pbtn {
     position: absolute;
-    bottom: 10%;
+    bottom: 20%;
     left: 50%;
     width: 87px;
     height: 87px;
     margin-left: -47px;
     transition: .5s all ease .8s;
-    // animation: breath 2s  linear infinite;
     > div {
       position: absolute;
       top: 0;
       left: 0;
-      & > img {
-        // animation: aroundBreath 2s  linear infinite;
-        animation: breath 2s linear infinite;
-      }
+    }
+    .btnarrow{
+      animation: breath 2s .2s linear infinite;
+    }
+    .btnborder{
+      animation: breathdelay 2s .3s linear infinite;
     }
   }
   &.on{
