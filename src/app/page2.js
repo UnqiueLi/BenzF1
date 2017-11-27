@@ -20,7 +20,7 @@
         setTimeout(function(){
             $('#audio')[0].addEventListener('ended', function () {
                 console.log('over');
-                $('.page-video').empty();
+                // $('.page-video').empty();
                 $('.pagevideo').addClass('on');
                 $('.pbtn').find('div').addClass('on');
             }, false);

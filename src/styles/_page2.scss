@@ -71,11 +71,11 @@
   background: url('assets/images/video-bg.jpg') no-repeat top/cover;
     opacity: 0;
   .pbtn {
+    width: 87px;
+    height: 87px;
     position: absolute;
     bottom: 20%;
     left: 50%;
-    width: 87px;
-    height: 87px;
     margin-left: -47px;
     transition: .5s all ease .8s;
     > div {
@@ -84,10 +84,20 @@
       left: 0;
     }
     .btnarrow{
-      animation: breath 2s .2s linear infinite;
+      animation: handarrow 2s  .2s linear infinite;
     }
     .btnborder{
-      animation: breathdelay 2s .3s linear infinite;
+      animation: breathdelay 2s .1s linear infinite;
+    }
+    .hand{
+      width:95px;
+      height:95px;
+      padding-top: 40px;
+      animation: hand 2s  linear infinite;
+    img{
+        height: 35px;
+        animation: handImg 2s  linear infinite;
+      }
     }
   }
   &.on{

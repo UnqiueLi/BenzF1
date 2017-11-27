@@ -1,116 +1,187 @@
 @keyframes flash {
-    from {
-        transform: scale(1);
-        opacity: 0;
-    }
-    1% {
-        opacity: 1;
-    }
-    2% {
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-        transform: scale(1.03);
-        filter: blur(3px);
-    }
-    16% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0px);
-    }
-    50% {
-        filter: blur(0px);
-    }
-    60% {
-        filter: blur(3px);
-    }
-    70% {
-        filter: blur(0px);
-        transform: scale(1.03);
-    }
-    to {
-        transform: scale(1);
-        opacity: .8;
-    }
-}
+  from {
+    transform: scale(1);
+    opacity: 0;
+  }
 
+  1% {
+    opacity: 1;
+  }
+
+  2% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+    transform: scale(1.03);
+    filter: blur(3px);
+  }
+
+  16% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+
+  50% {
+    filter: blur(0px);
+  }
+
+  60% {
+    filter: blur(3px);
+  }
+
+  70% {
+    filter: blur(0px);
+    transform: scale(1.03);
+  }
+
+  to {
+    transform: scale(1);
+    opacity: .8;
+  }
+}
 @keyframes arrowdown {
-    from {
-        transform: translate(0, 10%);
-    }
-    to {
-        transform: translate(0, -10%);
-    }
-}
+  from {
+    transform: translate(0, 10%);
+  }
 
+  to {
+    transform: translate(0, -10%);
+  }
+}
 @keyframes fudong {
-    from {
-        transform: rotate3d(0, 0, 1, -8deg) translate(0, 0);
-    }
-    to {
-        transform: rotate3d(0, 0, 1, -8deg) translate(0, 5%);
-    }
-}
+  from {
+    transform: rotate3d(0, 0, 1, -8deg) translate(0, 0);
+  }
 
+  to {
+    transform: rotate3d(0, 0, 1, -8deg) translate(0, 5%);
+  }
+}
 @keyframes jinru {
-    from {
-        transform: translate(0, 0);
-    }
-    to {
-        transform: translate(10%, -10%);
-    }
-}
+  from {
+    transform: translate(0, 0);
+  }
 
+  to {
+    transform: translate(10%, -10%);
+  }
+}
 @keyframes huadong {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-100%, 0);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-100%, 0);
-    }
-}
+  0% {
+    transform: translate(0, 0);
+  }
 
+  50% {
+    opacity: 1;
+    transform: translate(-100%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-100%, 0);
+  }
+}
 @keyframes breath {
-    0% {
-        opacity: .5;
-        transform: scale(1.1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: .8;
-        transform: scale(1.1);
-    }
-}
+  0% {
+    opacity: .5;
+    transform: scale(1.1);
+  }
 
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: .8;
+    transform: scale(1.1);
+  }
+}
 @keyframes around {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes breathdelay {
+  from {
+    opacity: .5;
+    transform: scale(1.2);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: .8;
+    transform: scale(1.2);
+  }
+}
+@keyframes hand {
     from {
+        opacity: 0;
+        transform: rotate(0deg);
+      }
+    
+      25% {
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+    
+      75% {
+        opacity: 1;
+        transform: rotate(-180deg);
+      }
+    
+      to {
+        opacity: 0;
+        transform: rotate(-180deg);
+      }
+}
+@keyframes handImg {
+  from {
+    opacity: 0;
+    transform: rotate(-360deg);
+  }
+
+  25% {
+    opacity: 1;
+    transform: rotate(-360deg);
+  }
+
+  75% {
+    opacity: 1;
+    transform: rotate(-180deg);
+  }
+
+  to {
+    opacity: 0;
+    transform: rotate(-180deg);
+  }
+}
+@keyframes handarrow {
+    form{
+        // opacity: 0;
+        // transform: rotate(0);
+    }
+    25%{
+        opacity: 1;
         transform: rotate(0);
     }
-    to {
-        transform: rotate(-360deg);
-    }
-}
-
-@keyframes breathdelay {
-    from {
-        opacity: .5;
-        transform: scale(1.2);
-    }
-    50%{
+    75%{
         opacity: 1;
-        transform: scale(1);
+        transform: rotate(-180deg);
     }
-    to {
-        opacity: .8;
-        transform: scale(1.2);
+    to{
+        // opacity: 0;
+        // transform: rotate(-180deg);
     }
 }
