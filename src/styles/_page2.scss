@@ -58,59 +58,56 @@
 
     }
   }
+  .cirle{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
 .pagebtn {
-  width: 100px;
-  height: 100px;
+  height: 250px !important;
   position: absolute;
-  bottom: 15%;
-  left: 50%;
-  margin-left: -47px;
+  bottom: 0;
+  left: 0;
   z-index: 100;
+  &.on{
+    opacity: 0 !important;
+  }
 }
-
 .pagevideo {
   background: url('assets/images/video-bg.jpg') no-repeat top/cover;
   opacity: 0;
   .pbtn {
-    width: 87px;
-    height: 87px;
+    width: 100%;
+    height: 100px;
     position: absolute;
-    bottom: 20%;
-    left: 50%;
-    margin-left: -47px;
-    transition: .5s all ease .8s;
+    bottom: 12%;
+    transition: .5s all ease;
     > div {
       width: 87px;
       height: 87px;
       position: absolute;
-      top: 0;
-      left: 0;
-      transform: rotate(180deg);
-      transition-delay: .2s;
+      left: 50%;
+      margin-left: -47px;
       &.on{
-        transition: none;
+        transition:none;
       }
     }
     .hand {
       width: 95px;
       height: 110px;
       padding-top: 40px;
-      transform: scale(.8) rotate(180deg);
-      
+      transition-delay: .2s;
       img {
         height: 35px;
       }
       &.on {
-        animation: hand 2s linear infinite;
+        animation: hand 2s  linear infinite;
         img {
           animation: handImg 2s linear infinite;
         }
       }
-    }
-    &.on{
-      transform: scale(1) rotate(0);
     }
   }
 
@@ -120,7 +117,7 @@
       animation: handarrow 2s linear infinite;
     }
     .btnborder {
-      animation: breathdelay 2s .1s linear infinite;
+      // animation: breathdelay 2s .1s linear infinite;
     }
   }
 }
