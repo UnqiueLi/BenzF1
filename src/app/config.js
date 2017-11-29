@@ -184,11 +184,12 @@ sc.baseUrl = (window.location.href.match(/^http[^#?]+\//i) || [])[0] || '';
         // route configuration
         $routeProvider
        
-            .when('/', {
+            .when('/home', {
                 templateUrl: 'app/home.html',
                 controller: 'HomeController'
             })
-            .when('/page2', {
+            // page2
+            .when('/', {
                 templateUrl: 'app/page2.html',
                 controller: 'Page2Controller'
             })

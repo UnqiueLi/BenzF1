@@ -10,22 +10,22 @@
     /** @ngInject */
     function Page2Controller($scope, $location) {
         var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { transparent: true, autoResize: true });
-        // $('.pagebtn').click(function(){
-        //     $('.page-video').addClass('on');
-        //     $('video')[0].play();
-        //     $(this).addClass('on');
-        // });
+        $('.pagebtn').click(function(){
+            $('.page-video').addClass('on');
+            $('video')[0].play();
+            $(this).addClass('on');
+        });
 
-        // var audio=$('#audio')[0];
-        // audio.loop = false;
-        // setTimeout(function(){
-        //     $('#audio')[0].addEventListener('ended', function () {
-        //         console.log('over');
-        //         // $('.page-video').empty();
-        //         $('.pagevideo').addClass('on');
-        //         $('.pbtn').find('div').addClass('on');
-        //     }, false);
-        // },5000);
+        var audio=$('#audio')[0];
+        audio.loop = false;
+        setTimeout(function(){
+            $('#audio')[0].addEventListener('ended', function () {
+                console.log('over');
+                // $('.page-video').empty();
+                $('.pagevideo').addClass('on');
+                $('.pbtn').find('div').addClass('on');
+            }, false);
+        },5000);
 
         //画圆
 
@@ -42,40 +42,23 @@
         // ctx.strokeStyle="#fff";
         // ctx.stroke();
 
+        //大面积画布
         var canvas = document.createElement('canvas');
         var ctx=canvas.getContext('2d');
         canvas.id = 'canvas';
         canvas.style.position = "absolute";
 
+        //下端解锁的画布
         var unCanvas=document.createElement('canvas');
         var ctx1=canvas.getContext('2d');
         var arr = [];
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        ctx1.beginPath();
+        ctx1.fillStyle="#fff";
+        ctx1.closePath();
         $('.cirle').append(canvas);
-
-        // $('.cirle').on({
-            // 'start': function(evt){
-                
-             
-            // }
-        //     'move':function(evt){
-        //         console.log('hello')
-        //         var e = evt || window.event;
-        //         var x1 = e.touches[0].clientX;
-        //         var y1 = e.touches[0].clientY;
-        //         console.log(x1);
-        //         console.log(y1);
-        //         arr.push({  
-        //             left:x1,
-        //             top:y1,
-        //         })
-        //         //     ctx.beginPath();
-        //         // ctx.arc(x,y,50,0,2*Math.PI);
-        //         ctx.lineWidth = 10;
-        //     }
-        // });
         $('.cirle').on('touchstart touchmove',function(evt){
             console.log(evt.type);
             var e = evt || window.event;
@@ -94,16 +77,56 @@
                 ctx1.strokeStyle="#fff";
                 ctx1.lineWidth=5;
                 ctx1.stroke();
+                TweenMax.to($('.btnarrow'),.2,{
+                    rotation:'360deg',
+                });
             }
             arr.push({  
                 left:x,
                 top:y
             })
-        })
-
+        });
         $('.cirle').on('touchend', function () {
-            
+            console.log(arr);
+            var result = [];
+            for (var i = 0; i < arr.length; i++) {
+                console.log('top:' + arr[i].top, 'left:' + arr[i].left);
+                // console.log(arr.length)
+                if (arr[i].top > 500) {
+                    result.push({
+                        top: arr[i].top,
+                        left: arr[i].left
+                    })
+                }
+            }
+            // console.log(result);
+            console.log('result' + result.length);
+            console.log('arrcount' + arr.length);
+            var point = result.length / arr.length * 100;
+            console.log(point);
+            if (point > 45) {
+                $('.box').addClass('on');
+                $('.pagevideo').removeClass('on');
+                $('.pbtn').find('div').removeClass('on');
+            }else{
+                $('.hand').addClass('on');
+            }
         })
+        //第一种方法 累计top的值
+        //第二种，建立一个新的空数组，push进去，利用下表索引做动画
+        // function comparePoint(arrs){
+        //     console.log(arrs);
+        //     var count=0;
+        //     for(var i=0;i<arrs.length;i++){
+        //         console.log(left,top);
+        //         if(arrs[i].top>500){
+        //             count++;
+        //         }
+        //计算点在页面画布上的百分比
+        
+        //         return count/arrs.length*100;
+        //     }
+        // }
     };
    
     window.onresize = function () {
