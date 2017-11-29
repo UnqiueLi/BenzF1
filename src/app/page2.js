@@ -10,25 +10,25 @@
     /** @ngInject */
     function Page2Controller($scope, $location) {
         var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { transparent: true, autoResize: true });
-        // $('.pagebtn').click(function(){
-        //     $('.page-video').addClass('on');
-        //     $('video')[0].play();
-        //     $(this).addClass('on');
-        // });
+        $('.pagebtn').click(function(){
+            $('.page-video').addClass('on');
+            $('video')[0].play();
+            $(this).addClass('on');
+        });
 
-        // var audio=$('#audio')[0];
-        // audio.loop = false;
-        // setTimeout(function(){
-        //     $('#audio')[0].addEventListener('ended', function () {
-        //         console.log('over');
-        //         // $('.page-video').empty();
-        //         $('.pagevideo').addClass('on');
-        //         $('.pbtn').find('div').addClass('on');
-        //     }, false);
-        // },5000);
+        var audio=$('#audio')[0];
+        audio.loop = false;
+        setTimeout(function(){
+            $('#audio')[0].addEventListener('ended', function () {
+                console.log('over');
+                // $('.page-video').empty();
+                $('.pagevideo').addClass('on');
+            }, false);
+            $('.pbtn').find('div').addClass('on');
+        },5000);
 
         //画圆
-
+    
         //测试
         // var canvas=document.getElementById("canvas");
         // var ctx=canvas.getContext('2d');
@@ -41,8 +41,8 @@
         // ctx.fillStyle="red";
         // ctx.strokeStyle="#fff";
         // ctx.stroke();
-        $('.pagevideo').addClass('on');
-                $('.pbtn').find('div').addClass('on');
+        // $('.pagevideo').addClass('on');
+        //         $('.pbtn').find('div').addClass('on');
         //大面积画布
         var canvas = document.createElement('canvas');
         var ctx=canvas.getContext('2d');
@@ -61,6 +61,10 @@
         $('.cirle').on('touchstart touchmove touchend',function(evt){
             console.log(evt.type);
             var e = evt || window.event;
+            TweenMax.to($('.btnarrow'),2,{
+                opacity:.5,
+                rotation:'180deg'
+            });
             if(e.type == 'touchstart'){
                 $('.hand').removeClass('on');
                 console.log(x);
