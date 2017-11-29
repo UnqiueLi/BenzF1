@@ -41,8 +41,6 @@
         // ctx.fillStyle="red";
         // ctx.strokeStyle="#fff";
         // ctx.stroke();
-
-
         $('.pagevideo').addClass('on');
                 $('.pbtn').find('div').addClass('on');
         //大面积画布
@@ -50,24 +48,18 @@
         var ctx=canvas.getContext('2d');
         canvas.id = 'canvas';
         canvas.style.position = "absolute";
-
         //下端解锁的画布
         var unCanvas=document.createElement('canvas');
         var ctx1=canvas.getContext('2d');
-       
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         $('.cirle').append(canvas);
-    
         ctx1.beginPath();
         ctx1.fillStyle="#fff";
         ctx1.closePath();
-        // arr.length=0;
         var arr=[];
         $('.cirle').on('touchstart touchmove touchend',function(evt){
             console.log(evt.type);
-           
             var e = evt || window.event;
             if(e.type == 'touchstart'){
                 $('.hand').removeClass('on');
@@ -84,13 +76,15 @@
                 ctx1.strokeStyle="#fff";
                 ctx1.lineWidth=5;
                 ctx1.stroke();
-                // TweenMax.to($('.btnarrow'),.2,{
-                //     rotation:'360deg',
-                // });
                 arr.push({
                     left: x,
                     top: y
                 })
+                console.log(arr.length);
+                var index=arr.length;
+                TweenMax.to($('.btnarrow img'), .1, {
+                    rotation: -index * index * .5,
+                });
             }else if(e.type == 'touchend'){
                 console.log(arr);
                 var result = [];
@@ -115,6 +109,9 @@
                     $('.pbtn').find('div').removeClass('on');
                 }else{
                     $('.hand').addClass('on');
+                    TweenMax.to($('.btnarrow img'), 2, {
+                        rotation: 0,
+                    });
                 }
                 arr=[];
             }
