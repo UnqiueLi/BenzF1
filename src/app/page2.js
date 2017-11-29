@@ -10,22 +10,22 @@
     /** @ngInject */
     function Page2Controller($scope, $location) {
         var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { transparent: true, autoResize: true });
-        $('.pagebtn').click(function(){
-            $('.page-video').addClass('on');
-            $('video')[0].play();
-            $(this).addClass('on');
-        });
+        // $('.pagebtn').click(function(){
+        //     $('.page-video').addClass('on');
+        //     $('video')[0].play();
+        //     $(this).addClass('on');
+        // });
 
-        var audio=$('#audio')[0];
-        audio.loop = false;
-        setTimeout(function(){
-            $('#audio')[0].addEventListener('ended', function () {
-                console.log('over');
-                // $('.page-video').empty();
-                $('.pagevideo').addClass('on');
-                $('.pbtn').find('div').addClass('on');
-            }, false);
-        },5000);
+        // var audio=$('#audio')[0];
+        // audio.loop = false;
+        // setTimeout(function(){
+        //     $('#audio')[0].addEventListener('ended', function () {
+        //         console.log('over');
+        //         // $('.page-video').empty();
+        //         $('.pagevideo').addClass('on');
+        //         $('.pbtn').find('div').addClass('on');
+        //     }, false);
+        // },5000);
 
         //画圆
 
@@ -42,6 +42,9 @@
         // ctx.strokeStyle="#fff";
         // ctx.stroke();
 
+
+        $('.pagevideo').addClass('on');
+                $('.pbtn').find('div').addClass('on');
         //大面积画布
         var canvas = document.createElement('canvas');
         var ctx=canvas.getContext('2d');
@@ -51,25 +54,29 @@
         //下端解锁的画布
         var unCanvas=document.createElement('canvas');
         var ctx1=canvas.getContext('2d');
-        var arr = [];
+       
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        $('.cirle').append(canvas);
+    
         ctx1.beginPath();
         ctx1.fillStyle="#fff";
         ctx1.closePath();
-        $('.cirle').append(canvas);
-        $('.cirle').on('touchstart touchmove',function(evt){
+        // arr.length=0;
+        var arr=[];
+        $('.cirle').on('touchstart touchmove touchend',function(evt){
             console.log(evt.type);
+           
             var e = evt || window.event;
-            var x = e.touches[0].clientX;
-            var y = e.touches[0].clientY;
             if(e.type == 'touchstart'){
                 $('.hand').removeClass('on');
                 console.log(x);
                 console.log(y);
                 ctx1.moveTo(x,y);
             }else if(e.type == 'touchmove'){
+                var x = e.touches[0].clientX;
+                var y = e.touches[0].clientY;
                 e.preventDefault();
                 console.log(x);
                 console.log(y);
@@ -77,54 +84,54 @@
                 ctx1.strokeStyle="#fff";
                 ctx1.lineWidth=5;
                 ctx1.stroke();
-                TweenMax.to($('.btnarrow'),.2,{
-                    rotation:'360deg',
-                });
-            }
-            arr.push({  
-                left:x,
-                top:y
-            })
-        });
-        $('.cirle').on('touchend', function () {
-            console.log(arr);
-            var result = [];
-            for (var i = 0; i < arr.length; i++) {
-                console.log('top:' + arr[i].top, 'left:' + arr[i].left);
-                // console.log(arr.length)
-                if (arr[i].top > 500) {
-                    result.push({
-                        top: arr[i].top,
-                        left: arr[i].left
-                    })
+                // TweenMax.to($('.btnarrow'),.2,{
+                //     rotation:'360deg',
+                // });
+                arr.push({
+                    left: x,
+                    top: y
+                })
+            }else if(e.type == 'touchend'){
+                console.log(arr);
+                var result = [];
+                for (var i = 0; i < arr.length; i++) {
+                    // console.log('top:' + arr[i].top, 'left:' + arr[i].left);
+                    // console.log(arr.length)
+                    if (arr[i].top > 500) {
+                        result.push({
+                            top: arr[i].top,
+                            left: arr[i].left
+                        })
+                    }
                 }
+                // console.log(result);
+                console.log('result' + result.length);
+                console.log('arrcount' + arr.length);
+                var point = result.length / arr.length * 100;
+                console.log(point);
+                if (point > 50) {
+                    $('.box').addClass('on');
+                    $('.pagevideo').removeClass('on');
+                    $('.pbtn').find('div').removeClass('on');
+                }else{
+                    $('.hand').addClass('on');
+                }
+                arr=[];
             }
-            // console.log(result);
-            console.log('result' + result.length);
-            console.log('arrcount' + arr.length);
-            var point = result.length / arr.length * 100;
-            console.log(point);
-            if (point > 45) {
-                $('.box').addClass('on');
-                $('.pagevideo').removeClass('on');
-                $('.pbtn').find('div').removeClass('on');
-            }else{
-                $('.hand').addClass('on');
-            }
-        })
+        });
         //第一种方法 累计top的值
         //第二种，建立一个新的空数组，push进去，利用下表索引做动画
-        // function comparePoint(arrs){
-        //     console.log(arrs);
+        // function comparePoint(arr){
+        //     console.log(arr);
         //     var count=0;
-        //     for(var i=0;i<arrs.length;i++){
+        //     for(var i=0;i<arr.length;i++){
         //         console.log(left,top);
-        //         if(arrs[i].top>500){
+        //         if(arr[i].top>500){
         //             count++;
         //         }
         //计算点在页面画布上的百分比
         
-        //         return count/arrs.length*100;
+        //         return count/arr.length*100;
         //     }
         // }
     };
