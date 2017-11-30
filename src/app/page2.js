@@ -71,50 +71,29 @@
             });
             if (e.type == 'touchstart') {
                 $('.hand').removeClass('on');
-                // console.log(x);
-                // console.log(y);
-                // ctx1.moveTo(x, y);
-
                 flag=true;
                 doSpawn(e,35*Math.random()+35);
             } else if (e.type == 'touchmove') {
-                // var x = e.touches[0].clientX;
-                // var y = e.touches[0].clientY;
-                // e.preventDefault();
-                // console.log(x);
-                // console.log(y);
-                // ctx1.lineTo(x, y);
-                // ctx1.strokeStyle = randomColor();
-                // ctx1.lineWidth = 5;
-                // ctx1.stroke();
                 if(flag){
-                    doSpawn(e,9);
+                    doSpawn(e,6);
                 }
-                // arr.push({
-                //     left: x,
-                //     top: y
-                // })
-                console.log(arr.length);
                 var index = arr.length;
                 TweenMax.to($('.btnarrow img'), .1, {
                     rotation: -index * index * .5,
                 });
             } else if (e.type == 'touchend') {
                 console.log(arr);
+              console.log("-----************************-");
                 flag=false;
                 var result = [];
                 for (var i = 0; i < arr.length; i++) {
-                    // console.log('top:' + arr[i].top, 'left:' + arr[i].left);
-                    // console.log(arr.length)
-                    if (arr[i].top > 500) {
+                    if (arr[i].y > 500) {
                         result.push({
-                            top: arr[i].top,
-                            left: arr[i].left
+                            top: arr[i].y,
+                            left: arr[i].x
                         })
                     }
                 }
-
-                // console.log(result);
                 console.log('result' + result.length);
                 console.log('arrcount' + arr.length);
                 var point = result.length / arr.length * 100;
@@ -147,7 +126,6 @@
         //         return count/arr.length*100;
         //     }
         // }
-
         var arr = [];
         animate();
         function animate(){
@@ -157,8 +135,8 @@
             },1000/60)
         }
         function doSpawn(e,n){   //设置孵化器的生产数量
-            var x = e.clientX || e.touches[0].pageX;  //鼠标坐标||移动端触摸坐标
-            var y = e.clientY || e.touches[0].pageY;
+            var x = e.clientX || e.touches[0].clientX;  //鼠标坐标||移动端触摸坐标
+            var y = e.clientY || e.touches[0].clientY;
             for (var i=0;i<n;i++){
                 Spawn(x,y);
             }
@@ -170,7 +148,7 @@
     
         }
         function render(){    //把生成的原点渲染出来
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx1.clearRect(0,0,canvas.width,canvas.height);
             for(var i = 0,len = arr.length; i < len; i++){
                 arr[i].draw();
                 arr[i].update();
@@ -192,10 +170,10 @@
             init:function(x,y){  //初始化小球各项数据
                 this.x = x || 0.0;
                 this.y = y || 0.0;
-                this.r = 10*Math.random() + 10 || 40;
+                this.r = 5*Math.random() + 5 || 20;
                 this.color = randomColor();
                 this.theta = Math.random()*2*Math.PI;
-                this.R = Math.random()*4 + 2;
+                this.R = Math.random()*2 + 1;
                 this.vx = Math.cos(this.theta)*this.R;
                 this.vy = Math.sin(this.theta)*this.R;
             },
@@ -210,9 +188,9 @@
                 this.y += this.vy;
                 this.vx += Math.cos(this.theta)*.1;
                 this.vy += Math.sin(this.theta)*.1;
-                this.vx *= .94;
-                this.vy *= .94;    //给速度设置一个衰减系数
-                this.r *=.92;
+                this.vx *= 1;
+                this.vy *= 1;    //给速度设置一个衰减系数
+                this.r *=.94;
                 this.color = randomColor(); //动态改变圆点的颜色达到闪烁的效果
             }
         };
