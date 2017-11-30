@@ -24,6 +24,7 @@
                 // $('.page-video').empty();
                 $('.pagevideo').addClass('on');
                 $('.pbtn').find('div').addClass('on');
+                $('.cirle').addClass('on');
             }, false);
         }, 5000);
 
@@ -76,10 +77,10 @@
                 e.preventDefault();
                 console.log(x);
                 console.log(y);
-                ctx1.lineTo(x, y);
-                ctx1.strokeStyle = "#fff";
-                ctx1.lineWidth = 5;
-                ctx1.stroke();
+                // ctx1.lineTo(x, y);
+                // ctx1.strokeStyle = randomColor();
+                // ctx1.lineWidth = 5;
+                // ctx1.stroke();
                 arr.push({
                     left: x,
                     top: y
@@ -135,6 +136,10 @@
         //         return count/arr.length*100;
         //     }
         // }
+
+        function randomColor() {
+            return "rgba(" + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + ",1)";
+        }
     };
 
     window.onresize = function () {
