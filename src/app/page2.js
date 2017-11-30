@@ -52,13 +52,16 @@
         //下端解锁的画布
         var unCanvas = document.createElement('canvas');
         var ctx1 = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+
+        var flag = false;    //启动的标志
+
         $('.cirle').append(canvas);
-        ctx1.beginPath();
-        ctx1.fillStyle = "#fff";
-        ctx1.closePath();
+        canvas.width = window.innerWidth || document.documentElement.clientWidth;
+        canvas.height = window.innerHeight ||  document.documentElement.clientHeight;
+
         var arr = [];
+
+
         $('.cirle').on('touchstart touchmove touchend', function (evt) {
             console.log(evt.type);
             var e = evt || window.event;
@@ -68,19 +71,25 @@
             });
             if (e.type == 'touchstart') {
                 $('.hand').removeClass('on');
-                console.log(x);
-                console.log(y);
+                // console.log(x);
+                // console.log(y);
                 ctx1.moveTo(x, y);
+
+                flag=true;
+                doSpawn(e,35*Math.random()+35);
             } else if (e.type == 'touchmove') {
                 var x = e.touches[0].clientX;
                 var y = e.touches[0].clientY;
                 e.preventDefault();
-                console.log(x);
-                console.log(y);
+                // console.log(x);
+                // console.log(y);
                 // ctx1.lineTo(x, y);
                 // ctx1.strokeStyle = randomColor();
                 // ctx1.lineWidth = 5;
                 // ctx1.stroke();
+                if(flag){
+                    doSpawn(e,9);
+                }
                 arr.push({
                     left: x,
                     top: y
@@ -92,6 +101,7 @@
                 });
             } else if (e.type == 'touchend') {
                 console.log(arr);
+                flag=false;
                 var result = [];
                 for (var i = 0; i < arr.length; i++) {
                     // console.log('top:' + arr[i].top, 'left:' + arr[i].left);
@@ -103,6 +113,8 @@
                         })
                     }
                 }
+
+
                 // console.log(result);
                 console.log('result' + result.length);
                 console.log('arrcount' + arr.length);
@@ -137,9 +149,78 @@
         //     }
         // }
 
-        function randomColor() {
-            return "rgba(" + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + ",1)";
+        var particles = [];
+        animate();
+        function animate(){
+            setInterval(function(){
+                render();
+                area();
+            },1000/60)
         }
+        function doSpawn(e,n){   //设置孵化器的生产数量
+            var x = e.clientX || e.touches[0].pageX;  //鼠标坐标||移动端触摸坐标
+            var y = e.clientY || e.touches[0].pageY;
+            for (var i=0;i<n;i++){
+                Spawn(x,y);
+            }
+        }
+        function Spawn(x,y){   //孵化器，生成一个原点对象
+            var particle=new Particle();
+            particle.init(x,y);
+            particles.push(particle);
+    
+        }
+        function render(){    //把生成的原点渲染出来
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            for(var i = 0,len = particles.length; i < len; i++){
+                particles[i].draw();
+                particles[i].update();
+            }
+        }
+        function area(){  //半径足够小的时候删除该点
+            var n = 0;
+            for( var i = 0, l = particles.length; i < l; i++ ) {
+                if (particles[i].r >1 ) {
+                    particles[n++] = particles[i];
+                }
+            }
+            while( particles.length > Math.min(700,n) ) {
+                particles.pop();
+            }
+        }
+        function Particle(){}  //构造函数，小球原型
+        Particle.prototype={
+            init:function(x,y){  //初始化小球各项数据
+                this.x = x || 0.0;
+                this.y = y || 0.0;
+                this.r = 10*Math.random() + 10 || 40;
+                this.color = randomColor();
+                this.theta = Math.random()*2*Math.PI;
+                this.R = Math.random()*4 + 2;
+                this.vx = Math.cos(this.theta)*this.R;
+                this.vy = Math.sin(this.theta)*this.R;
+            },
+            draw:function(){    //画出一个球的方法
+                ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            },
+            update:function(){    //改变球的各项属相的方法
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vx += Math.cos(this.theta)*.1;
+                this.vy += Math.sin(this.theta)*.1;
+                this.vx *= .94;
+                this.vy *= .94;    //给速度设置一个衰减系数
+                this.r *=.92;
+                this.color = randomColor(); //动态改变圆点的颜色达到闪烁的效果
+            }
+        };
+     //随机16进制颜色
+     function randomColor() {
+        return "rgba(" + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + ",1)";
+    }
     };
 
     window.onresize = function () {
