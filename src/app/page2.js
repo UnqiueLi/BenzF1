@@ -43,7 +43,7 @@
         // ctx.strokeStyle="#fff";
         // ctx.stroke();
         // $('.pagevideo').addClass('on');
-        //         $('.pbtn').find('div').addClass('on');
+        // $('.pbtn').find('div').addClass('on');
         //大面积画布
         var canvas = document.createElement('canvas');
         var ctx = canvas.getContext('2d');
@@ -73,14 +73,14 @@
                 $('.hand').removeClass('on');
                 // console.log(x);
                 // console.log(y);
-                ctx1.moveTo(x, y);
+                // ctx1.moveTo(x, y);
 
                 flag=true;
                 doSpawn(e,35*Math.random()+35);
             } else if (e.type == 'touchmove') {
-                var x = e.touches[0].clientX;
-                var y = e.touches[0].clientY;
-                e.preventDefault();
+                // var x = e.touches[0].clientX;
+                // var y = e.touches[0].clientY;
+                // e.preventDefault();
                 // console.log(x);
                 // console.log(y);
                 // ctx1.lineTo(x, y);
@@ -90,10 +90,10 @@
                 if(flag){
                     doSpawn(e,9);
                 }
-                arr.push({
-                    left: x,
-                    top: y
-                })
+                // arr.push({
+                //     left: x,
+                //     top: y
+                // })
                 console.log(arr.length);
                 var index = arr.length;
                 TweenMax.to($('.btnarrow img'), .1, {
@@ -113,7 +113,6 @@
                         })
                     }
                 }
-
 
                 // console.log(result);
                 console.log('result' + result.length);
@@ -149,7 +148,7 @@
         //     }
         // }
 
-        var particles = [];
+        var arr = [];
         animate();
         function animate(){
             setInterval(function(){
@@ -167,25 +166,25 @@
         function Spawn(x,y){   //孵化器，生成一个原点对象
             var particle=new Particle();
             particle.init(x,y);
-            particles.push(particle);
+            arr.push(particle);
     
         }
         function render(){    //把生成的原点渲染出来
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            for(var i = 0,len = particles.length; i < len; i++){
-                particles[i].draw();
-                particles[i].update();
+            for(var i = 0,len = arr.length; i < len; i++){
+                arr[i].draw();
+                arr[i].update();
             }
         }
         function area(){  //半径足够小的时候删除该点
             var n = 0;
-            for( var i = 0, l = particles.length; i < l; i++ ) {
-                if (particles[i].r >1 ) {
-                    particles[n++] = particles[i];
+            for( var i = 0, l = arr.length; i < l; i++ ) {
+                if (arr[i].r >1 ) {
+                    arr[n++] = arr[i];
                 }
             }
-            while( particles.length > Math.min(700,n) ) {
-                particles.pop();
+            while( arr.length > Math.min(700,n) ) {
+                arr.pop();
             }
         }
         function Particle(){}  //构造函数，小球原型
