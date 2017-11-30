@@ -72,14 +72,14 @@
             if (e.type == 'touchstart') {
                 $('.hand').removeClass('on');
                 flag=true;
-                doSpawn(e,35*Math.random()+35);
+                doSpawn(e,10*Math.random()+10);
             } else if (e.type == 'touchmove') {
                 if(flag){
                     doSpawn(e,6);
                 }
                 var index = arr.length;
-                TweenMax.to($('.btnarrow img'), .1, {
-                    rotation: -index * index * .5,
+                TweenMax.to($('.btnarrow img'), .5, {
+                    rotation: -index * index ,
                 });
             } else if (e.type == 'touchend') {
                 console.log(arr);
@@ -135,8 +135,8 @@
             },1000/60)
         }
         function doSpawn(e,n){   //设置孵化器的生产数量
-            var x = e.clientX || e.touches[0].clientX;  //鼠标坐标||移动端触摸坐标
-            var y = e.clientY || e.touches[0].clientY;
+            var x =  e.touches[0].clientX;  //移动端触摸坐标
+            var y =  e.touches[0].clientY;
             for (var i=0;i<n;i++){
                 Spawn(x,y);
             }
